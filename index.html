@@ -1,7 +1,201 @@
 
-<h1>AI HomePage 项目页</h1><br><br>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI HomePage 项目页</title>
+  <style>
+    :root {
+      --ink: #1f2733;
+      --muted: #687282;
+      --paper: #fffdf8;
+      --surface: rgba(255, 255, 255, 0.78);
+      --line: #d9cec0;
+      --gold: #9b7a3a;
+      --jade: #2f6f63;
+      --shadow: rgba(31, 39, 51, 0.1);
+    }
 
+    * {
+      box-sizing: border-box;
+    }
 
-<a href="https://ooof.github.io/AI_HomePage/ningxia-carpet-research/ningxia-role.html">宁夏地毯的历史作用、价值评估与产业启示</a><br>
-<a href="https://ooof.github.io/AI_HomePage/slj-portal/index.html">水利局</a><br>
-<a href="https://ooof.github.io/AI_HomePage/ai-3-html/index.html">三个 AI Agent 制作网页效果比较<a><br>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+      background:
+        linear-gradient(135deg, rgba(155, 122, 58, 0.13), transparent 34%),
+        linear-gradient(225deg, rgba(47, 111, 99, 0.1), transparent 36%),
+        var(--paper);
+      color: var(--ink);
+    }
+
+    main {
+      width: min(920px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+
+    .hero {
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--gold);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 7vw, 66px);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 24px 26px;
+      border: 1px solid rgba(217, 206, 192, 0.9);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 18px 40px var(--shadow);
+      color: inherit;
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(155, 122, 58, 0.72);
+      box-shadow: 0 24px 54px rgba(31, 39, 51, 0.16);
+    }
+
+    .index {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--gold);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      font-weight: 700;
+    }
+
+    .project-card h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .project-card p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .arrow {
+      color: var(--jade);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      font-size: 24px;
+    }
+
+    footer {
+      margin-top: 44px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+    }
+
+    @media (max-width: 680px) {
+      main {
+        width: min(100% - 28px, 920px);
+        padding: 44px 0;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 22px;
+      }
+
+      .arrow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p class="eyebrow">AI HomePage Collection</p>
+      <h1>AI HomePage 项目页</h1>
+      <p class="intro">一个整理中的作品入口，收纳研究、业务展示与 AI 网页实验。每个项目都以独立页面呈现，适合快速浏览与对外分享。</p>
+    </header>
+
+    <section class="project-list" aria-label="项目列表">
+      <a class="project-card" href="https://ooof.github.io/AI_HomePage/ningxia-carpet-research/ningxia-role.html">
+        <span class="index">01</span>
+        <span>
+          <h2>宁夏地毯的历史作用、价值评估与产业启示</h2>
+          <p>历史脉络、文化价值与产业观察的专题整理。</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="project-card" href="https://ooof.github.io/AI_HomePage/slj-portal/index.html">
+        <span class="index">02</span>
+        <span>
+          <h2>水利局业务进展概览</h2>
+          <p>面向业务进度与工作概览的信息展示页。</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="project-card" href="https://ooof.github.io/AI_HomePage/ai-3-html/index.html">
+        <span class="index">03</span>
+        <span>
+          <h2>三个 AI Agent 制作网页效果比较</h2>
+          <p>以相同提示词对比不同 AI Agent 的网页生成结果。</p>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </section>
+
+    <footer>ooof 开放实验室 · 2026-07-24</footer>
+  </main>
+</body>
+</html>
