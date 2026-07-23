@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>页面 A</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px;
+      background: white;
+      box-shadow: 0 2px 10px rgba(31, 41, 55, 0.08);
+    }
+
+    nav a {
+      color: #2563eb;
+      text-decoration: none;
+      padding: 8px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    nav a.active,
+    nav a:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 48px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+    }
+
+    .page-ring {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #2563eb 0deg 120deg,
+        #86efac 120deg 240deg,
+        #fdba74 240deg 360deg
+      );
+      box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.12), 0 16px 28px rgba(37, 99, 235, 0.24);
+      position: relative;
+    }
+
+    .page-ring::after {
+      content: "A";
+      position: absolute;
+      inset: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: white;
+      color: #2563eb;
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    .ring-legend {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .ring-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ring-legend span::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--dot-color);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>这是页面 A</h1>
+    <p>A、B、C 三个网页已经互相链接。</p>
+  </header>
+
+  <nav>
+    <a class="active" href="a.html">页面 A</a>
+    <a href="b.html">页面 B</a>
+    <a href="c.html">页面 C</a>
+  </nav>
+
+  <main>
+    <section class="panel">
+      <div class="page-ring" aria-label="三部分圆环，当前突出显示页面 A"></div>
+      <div class="ring-legend">
+        <span style="--dot-color: #2563eb;">页面 A</span>
+        <span style="--dot-color: #86efac;">页面 B</span>
+        <span style="--dot-color: #fdba74;">页面 C</span>
+      </div>
+      <h2>欢迎来到 A 页面</h2>
+      <p>你可以通过上方导航跳转到 B 页面或 C 页面。</p>
+    </section>
+  </main>
+</body>
+</html>
