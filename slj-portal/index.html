@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>临汾市水利局 — 业务进展专题</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f4f5f7;
+  --surface: #fff;
+  --border: #e2e5ea;
+  --text: #1a1f2e;
+  --text-secondary: #5e6778;
+  --accent: #1e6f9f;
+  --accent-light: #e8f2f8;
+  --green: #1a8754;
+  --green-bg: #e6f4ea;
+  --amber: #b76e00;
+  --amber-bg: #fff4e0;
+  --red: #c62828;
+  --red-bg: #fdeaeb;
+  --radius: 6px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+.app { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 16px; }
+.header-brand { display: flex; align-items: center; gap: 10px; }
+.header-logo { width: 36px; height: 36px; background: var(--accent); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 18px; }
+.header-title { font-size: 17px; font-weight: 700; color: var(--text); }
+.header-subtitle { font-size: 12px; color: var(--text-secondary); }
+.header-badge { margin-left: auto; font-size: 11px; background: var(--accent-light); color: var(--accent); padding: 3px 10px; border-radius: 100px; font-weight: 600; }
+
+.nav { display: flex; gap: 2px; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; }
+.nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; gap: 0; }
+.nav-item { padding: 12px 18px; font-size: 14px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border: none; background: none; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .15s; }
+.nav-item:hover { color: var(--text); background: #f8f9fb; }
+.nav-item.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+.main { padding: 24px 0; }
+
+.card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.card-header h2 { font-size: 15px; font-weight: 600; }
+.card-body { padding: 20px; }
+.card-body.no-pad { padding: 0; }
+
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; }
+.stat-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+.stat-value { font-size: 28px; font-weight: 700; color: var(--text); }
+.stat-desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.stat-accent { color: var(--accent); }
+.stat-green { color: var(--green); }
+.stat-amber { color: var(--amber); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+.grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.timeline-item { position: relative; margin-bottom: 20px; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot { position: absolute; left: -20px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.timeline-dot.green { background: var(--green); }
+.timeline-dot.amber { background: var(--amber); }
+.timeline-date { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+.timeline-title { font-size: 14px; font-weight: 600; margin: 2px 0; }
+.timeline-desc { font-size: 13px; color: var(--text-secondary); }
+
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-amber { background: var(--amber-bg); color: var(--amber); }
+.badge-red { background: var(--red-bg); color: var(--red); }
+.badge-accent { background: var(--accent-light); color: var(--accent); }
+
+.progress-bar { height: 6px; background: #e9ecef; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+.progress-fill.green { background: var(--green); }
+.progress-fill.amber { background: var(--amber); }
+
+.org-chart { display: flex; flex-direction: column; gap: 12px; }
+.org-level { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+.org-node { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; font-size: 13px; min-width: 140px; }
+.org-node.lead { border-left: 3px solid var(--accent); }
+.org-node.dep { border-left: 3px solid var(--green); }
+.org-node.sub { border-left: 3px solid var(--amber); }
+.org-node-name { font-weight: 600; }
+.org-node-role { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; padding: 10px 16px; background: #f8f9fb; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: .3px; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+.data-table tr:last-child td { border-bottom: none; }
+
+.proj-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--surface); }
+.proj-card h3 { font-size: 16px; margin-bottom: 4px; }
+.proj-card .proj-loc { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
+.proj-meta { display: flex; gap: 24px; margin-bottom: 12px; font-size: 12px; color: var(--text-secondary); }
+.proj-meta span { display: flex; align-items: center; gap: 4px; }
+
+.ann-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.ann-item:last-child { border-bottom: none; }
+.ann-date { font-size: 11px; color: var(--text-secondary); }
+.ann-title { font-size: 14px; font-weight: 500; margin: 2px 0; }
+.ann-tags { display: flex; gap: 6px; margin-top: 4px; }
+
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--text); }
+
+@media (max-width: 900px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .grid-2, .grid-2-1 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .stats-row, .grid-3 { grid-template-columns: 1fr; }
+  .nav-item { padding: 10px 12px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">水</div>
+      <div>
+        <div class="header-title">临汾市水利局</div>
+        <div class="header-subtitle">Linfen Water Resources Bureau</div>
+      </div>
+    </div>
+    <div class="header-badge">2026年度 · 业务进展</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner" id="navTabs"></div>
+</nav>
+
+<main class="main">
+  <div class="app" id="contentArea"></div>
+</main>
+
+<script>
+const DATA = {
+  bureau: {
+    name: "临汾市水利局",
+    address: "尧都区体育街105号",
+    nature: "临汾市人民政府组成部门",
+    honors: [
+      { name: "全国水利扶贫先进集体", year: 2021, source: "水利部公示" },
+      { name: "首届中国节水奖先进集体", year: null, source: "国家级表彰" }
+    ]
+  },
+  leadership: [
+    { name: "宋大鹏", role: "局长", duty: "主持全面工作", type: "lead" },
+    { name: "邢磊", role: "纪检监察组组长", duty: "负责纪检监察工作", type: "lead" },
+    { name: "赵有合", role: "党组成员、副局长", duty: "分管办公室、人事、工程建设、水旱灾害防御、法治、质安及财务", type: "lead" },
+    { name: "许爱琴", role: "党组成员、副局长", duty: "分管规划计划、河湖管理、水资源管理、节水工作", type: "lead" },
+    { name: "杨杜学", role: "党组成员、引沁入汾和汾西灌区主任", duty: "负责引沁入汾和汾西灌区水利服务中心全面工作", type: "lead" },
+    { name: "李会平", role: "一级调研员", duty: "负责农村水利水电、水土保持和水库移民工作", type: "lead" },
+    { name: "张文英", role: "三级调研员", duty: "负责群团工作（工会、妇联、共青团）", type: "lead" }
+  ],
+  departments: [
+    { name: "办公室", dual: null, duties: "机关日常运转、文电会务、电子政务、档案机要、信息宣传、安全保密、信访维稳、应急协调、法规起草、合法性审查、水政监察、水行政执法、县际水事纠纷查处" },
+    { name: "人事科", dual: null, duties: "人事编制、劳动工资、教育培训、人才队伍建设、职称评审、年度考核、离退休管理、水利体制改革" },
+    { name: "规划计划科", dual: "内审科", duties: "水利战略规划编制、固定资产投资建议、项目审核审批、年度投资计划、水利统计、政策督查与绩效评价、内部审计、水利科研与信息化" },
+    { name: "水利工程建设和运行管理科", dual: "水旱灾害防御科", duties: "水利工程建设管理、除险加固、市场监督与信用体系、设施管理与划界、洪水干旱防治规划、水情旱情预警、蓄滞洪区管理、质量安全监督" },
+    { name: "河湖管理和水资源管理科", dual: "市节约用水工作科", duties: "最严格水资源管理制度、取水许可论证、水量分配、地下水保护、河长制日常工作、水域岸线管理、水生态修复、河道采砂监管、节约用水规划、节水型社会建设" },
+    { name: "农村水利水电科", dual: null, duties: "农村水利指导、大中型灌区建设改造、节水灌溉、乡镇供水、农村饮水安全、农村水利改革创新、农村水能资源开发管理" },
+    { name: "水土保持和水库移民科", dual: null, duties: "水土保持综合防治、水土流失监测公告、生产建设项目水保方案审核、重点防治区管理、移民政策拟定、移民安置验收与后期扶持、水库移民人口核定" }
+  ],
+  subordinateUnits: [
+    { name: "临汾市引沁入汾和汾西灌区水利服务中心", duty: "灌区水量调配、工程管护、供水任务及中小型水库运行" },
+    { name: "临汾市水利发展中心", duty: "水利规划、投资、建设、信息化及科研的技术支撑与服务保障" },
+    { name: "临汾市水库移民管理中心", duty: "水利水电工程移民安置、后期扶持资金绩效评价及监测评估" },
+    { name: "山西省郭庄泉域保护中心", duty: "郭庄泉域水资源保护、水质水量监测、水土保持监管及技术咨询" },
+    { name: "临汾市河长制执行中心", duty: "河湖长制技术支撑、平台运行、数据监测及涉河项目防洪评价" },
+    { name: "临汾市水旱灾害防御中心", duty: "水旱灾害防御技术支撑、调度方案编制、监测预警及演练" }
+  ],
+  keyProjects: [
+    {
+      name: "黄河古贤水利枢纽工程",
+      status: "推进中",
+      statusType: "green",
+      progress: 35,
+      location: "吉县、大宁县、永和县、乡宁县",
+      category: "国家重大战略工程",
+      description: "黄河流域生态保护和高质量发展标志性工程，健全黄河水沙调控体系。",
+      milestones: [
+        { date: "2026-05-14", text: "山西省建设征地移民安置工作推进会召开，省政府与临汾等三市签订移民安置协议", type: "green" },
+        { date: "2026-06-18", text: "市委书记李新春与黄河古贤水利枢纽有限公司刘定友一行工作会谈，承诺全方位全要素服务保障", type: "green" },
+        { date: "2026年中期", text: "临时桥顺利合龙，主体工程持续推进", type: "amber" },
+        { date: "后续", text: "移民安置规划编制、工作专班常态化运行", type: "accent" }
+      ],
+      management: "政府领导、分级负责、县为基础、项目法人参与",
+      org: ["黄河古贤水利枢纽有限公司（项目法人）", "黄河勘测规划设计研究院有限公司（设计）", "临汾市水库移民管理中心（地方执行）"]
+    },
+    {
+      name: "中部引黄县域配套工程",
+      status: "推进中",
+      statusType: "amber",
+      progress: 25,
+      location: "临汾市相关县域",
+      category: "省级重点工程",
+      description: "山西水工集团重点参与，涉及尧都区仙洞沟水库等配套项目。",
+      milestones: [
+        { date: "2026-04-12", text: "山西水工集团与市水利局交流座谈，重点交换中部引黄配套意见", type: "green" }
+      ]
+    },
+    {
+      name: "汾西灌区龙子祠泉水向侯马供水水源置换工程",
+      status: "推进中",
+      statusType: "amber",
+      progress: 30,
+      location: "尧都区—侯马",
+      category: "市级重点工程",
+      description: "优化区域水资源配置，保障侯马市供水安全。",
+      milestones: [
+        { date: "2026-04-12", text: "山西水工集团与市水利局就该项目交流意见", type: "green" }
+      ]
+    }
+  ],
+  safetyWork: {
+    context: "2026年是\u201c十五五\u201d规划开局之年，也是水利安全生产治本攻坚三年行动收官之年。",
+    goals: [
+      "坚决守住不发生重特大事故底线",
+      "确保不出现防汛险情",
+      "隐患\u201c见底清零\u201d"
+    ],
+    tasks: [
+      { name: "复工复产安全管控", desc: "严把在建水利工程复工复产安全关口" },
+      { name: "治本攻坚收官", desc: "纵深推进治本攻坚行动，推动安全防控六项机制提质增效" },
+      { name: "隐患排查整治", desc: "紧盯火灾隐患、涉水场所、极端天气防御等关键环节" },
+      { name: "水库安全管理", desc: "严格水库蓄水管理，加快汛前隐患整改" },
+      { name: "应急值班值守", desc: "24小时值班，备足配齐防汛物料，扎实开展汛前安全大检查" }
+    ],
+    inspections: [
+      { date: "2026-04-10", text: "安全生产委员会第二次全体（扩大）会议，明确2026年安全工作底线与任务" },
+      { date: "2026-04-23", text: "市委副书记、市长王延峰沿汾河巡河，调研督导防汛备汛及地质灾害防治" },
+      { date: "2026-05-12", text: "省水利厅厅长龚孟建赴临汾督导检查，深入涝河、洰河水库及水文站" },
+      { date: "2026-05-19", text: "市政府常务会议，强调科技手段在防汛监测中的应用及穿透式隐患排查" }
+    ]
+  },
+  riverLake: {
+    title: "河湖管理与河湖长制",
+    tasks2026: [
+      { name: "完善运行机制", desc: "压实责任，构建共治格局" },
+      { name: "夯实基础工作", desc: "落实涉河问题调查处置机制，推进乡村河湖库管护攻坚，开展河湖健康评价" },
+      { name: "严格水域岸线管控", desc: "深化\u201c清四乱\u201d，加强涉河项目审批与采砂监管" },
+      { name: "实施治理工程", desc: "提升汾河干流防洪能力，推进中小河流治理" },
+      { name: "建设幸福河湖", desc: "积极申报国家级幸福河湖项目，提升群众获得感" }
+    ],
+    technical: "遥感图斑核查\u201c回头看\u201d，确保数据准确、问题清零。",
+    meeting: { date: "2026-04-22", text: "全市河长制、河湖治理管理暨碍洪问题整治工作会议 — 部署2026年五项重点任务，强调汛前碍洪问题拉网式排查和动态销号" }
+  },
+  waterResource: {
+    title: "最严格水资源管理制度",
+    principles: ["用水总量控制", "用水效率控制", "水功能区限制纳污"],
+    measures: [
+      "取水许可、水资源论证和防洪论证制度",
+      "水中长期供求规划与水量分配方案",
+      "主要流域、区域及调水工程水资源调度",
+      "地下水超采区综合治理"
+    ],
+    highlights: [
+      { name: "四水四定", desc: "以水定城、以水定地、以水定人、以水定产——省厅重点督导方向" },
+      { name: "郭庄泉域保护", desc: "岩溶大泉保护及水土保持监管，省郭庄泉域保护中心专项负责" },
+      { name: "节水型社会建设", desc: "推动计划用水、定额管理，指导非常规水源开发利用，荣获首届中国节水奖" }
+    ]
+  },
+  ruralWater: {
+    highlights: [
+      { name: "农村饮水安全", desc: "编制全市农村饮水安全发展规划，组织实施工程建设及管理" },
+      { name: "灌区建设改造", desc: "组织开展大中型灌区工程建设与改造，指导节水灌溉" },
+      { name: "农村供水提档升级", desc: "省水利厅厅长龚孟建专题督导，推进农村供水保障水平提升" },
+      { name: "农村水电开发", desc: "指导水电农村电气化、增效扩容改造及小水电代燃料" }
+    ]
+  },
+  soilImmigration: {
+    soil: [
+      "组织协调全市水土保持工作，承担水土流失综合防治",
+      "负责水土流失监测、预报并定期公告",
+      "审核大中型生产建设项目水土保持方案并监督实施",
+      "协调水土保持科技工作，组织推广科研成果"
+    ],
+    immigration: [
+      "拟订水利水电工程移民政策",
+      "承担移民管理和后期扶持工作",
+      "组织实施移民安置验收、监督评估",
+      "审核大中型水利水电工程移民安置规划",
+      "开展新增水库移民后期扶持人口核定"
+    ],
+    keyProject: "黄河古贤水利枢纽工程移民安置——涉及吉县、大宁县、永和县、乡宁县，实行\u201c政府领导、分级负责、县为基础、项目法人参与\u201d管理体制"
+  },
+  announcements: [
+    { date: "2026-06-18", title: "市委书记李新春与黄河古贤水利枢纽有限公司举行工作会谈", tags: ["重大工程", "古贤"] },
+    { date: "2026-05-19", title: "市政府常务会议研究部署防汛救灾与安全生产工作", tags: ["安全", "政务"] },
+    { date: "2026-05-14", title: "黄河古贤水利枢纽工程山西省移民安置推进会暨协议签订会召开", tags: ["移民", "古贤"] },
+    { date: "2026-05-12", title: "省水利厅厅长龚孟建赴临汾督导检查防汛备汛工作", tags: ["防汛", "安全"] },
+    { date: "2026-04-23", title: "市长王延峰沿汾河调研督导防汛备汛与地质灾害防治", tags: ["防汛", "调研"] },
+    { date: "2026-04-22", title: "全市河长制、河湖治理管理暨碍洪问题整治工作会议召开", tags: ["河湖", "治理"] },
+    { date: "2026-04-22", title: "局长宋大鹏在霍州市调研河道堤防与郭庄泉域保护", tags: ["调研", "泉域"] },
+    { date: "2026-04-12", title: "山西水工集团与市水利局交流座谈，共商重点水利工程合作", tags: ["工程", "合作"] },
+    { date: "2026-04-10", title: "安全生产委员会第二次全体（扩大）会议部署2026年水利安全工作", tags: ["安全", "政务"] }
+  ]
+};
+
+const TABLES = {
+  overview: function() {
+    const stats = [
+      { label: "内设科室", value: "7", desc: "一套人马、两块牌子", cls: "stat-accent" },
+      { label: "直属事业单位", value: "6", desc: "技术支撑与服务保障", cls: "stat-accent" },
+      { label: "重大工程项目", value: "3+", desc: "含国家战略工程1项", cls: "stat-green" },
+      { label: "年度重点任务", value: "5项", desc: "河湖长制2026重点工作", cls: "stat-amber" }
+    ];
+    let h = '<div class="section-title">业务进展概览</div>';
+    h += '<div class="stats-row">';
+    stats.forEach(s => {
+      h += '<div class="stat-card"><div class="stat-label">' + s.label + '</div><div class="stat-value ' + s.cls + '">' + s.value + '</div><div class="stat-desc">' + s.desc + '</div></div>';
+    });
+    h += '</div>';
+
+    h += '<div class="grid-2-1">';
+    h += '<div class="card"><div class="card-header"><h2>最新动态</h2></div><div class="card-body">';
+    DATA.announcements.slice(0, 6).forEach(a => {
+      h += '<div class="ann-item"><div class="ann-date">' + a.date + '</div><div class="ann-title">' + a.title + '</div><div class="ann-tags">' + a.tags.map(t => '<span class="badge badge-accent">' + t + '</span>').join('') + '</div></div>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>单位概况</h2></div><div class="card-body">';
+    h += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">' + DATA.bureau.nature + '</p>';
+    h += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">\ud83d\udccd ' + DATA.bureau.address + '</p>';
+    h += '<p style="font-size:13px;font-weight:600;margin-bottom:8px;">荣誉</p>';
+    DATA.bureau.honors.forEach(hon => {
+      const y = hon.year ? '\uff08' + hon.year + '\u5e74\uff09' : '';
+      h += '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">\ud83c\udfc6 ' + hon.name + y + ' \u2014 ' + hon.source + '</div>';
+    });
+    h += '</div></div></div>';
+
+    h += '<div class="grid-2">';
+    h += '<div class="card"><div class="card-header"><h2>重大工程进展</h2></div><div class="card-body">';
+    DATA.keyProjects.forEach(p => {
+      const badgeCls = p.statusType === 'green' ? 'badge-green' : p.statusType === 'amber' ? 'badge-amber' : 'badge-accent';
+      h += '<div class="proj-card" style="margin-bottom:12px;box-shadow:none;border:1px solid var(--border);"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><h3 style="font-size:15px;">' + p.name + '</h3><span class="badge ' + badgeCls + '">' + p.status + '</span></div>';
+      h += '<div class="proj-loc">\ud83d\udccd ' + p.location + ' \u00b7 ' + p.category + '</div>';
+      h += '<div style="display:flex;align-items:center;gap:10px;margin:10px 0;"><div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:' + p.progress + '%"></div></div><span style="font-size:12px;color:var(--text-secondary);">' + p.progress + '%</span></div>';
+      h += '<p style="font-size:12px;color:var(--text-secondary);">' + p.description + '</p></div>';
+      if (p.name.indexOf('黄河古贤') === 0) h += '<a href="guxian.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('中部引黄') === 0) h += '<a href="zhongbu-yinhuang.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('汾西灌区') === 0) h += '<a href="fenxi-guanqu.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('中部引黄') === 0) h += '<a href="zhongbu-yinhuang.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('汾西灌区') === 0) h += '<a href="fenxi-guanqu.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>2026年安全工作要点</h2><a href="fangxun.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a></div><div class="card-body">';
+    h += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">' + DATA.safetyWork.context + '</p>';
+    DATA.safetyWork.tasks.forEach(t => {
+      h += '<div style="font-size:13px;margin-bottom:8px;padding-left:16px;border-left:2px solid var(--border);"><strong>' + t.name + '</strong><br><span style="color:var(--text-secondary);">' + t.desc + '</span></div>';
+    });
+    h += '</div></div></div>';
+    return h;
+  },
+
+  organization: function() {
+    let h = '<div class="section-title">机构设置与领导分工</div>';
+
+    h += '<div class="card" style="margin-bottom:20px;"><div class="card-header"><h2>领导成员</h2></div><div class="card-body">';
+    h += '<div class="org-chart"><div class="org-level">';
+    DATA.leadership.forEach(l => {
+      h += '<div class="org-node lead"><div class="org-node-name">' + l.name + '</div><div class="org-node-role">' + l.role + '</div><div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">' + l.duty + '</div></div>';
+    });
+    h += '</div></div></div></div>';
+
+    h += '<div class="card" style="margin-bottom:20px;"><div class="card-header"><h2>内设科室（7个）</h2></div><div class="card-body no-pad">';
+    h += '<table class="data-table"><thead><tr><th>科室</th><th>合署/挂牌</th><th>主要职责</th></tr></thead><tbody>';
+    DATA.departments.forEach(d => {
+      h += '<tr><td style="font-weight:600;">' + d.name + '</td><td><span class="badge badge-accent">' + (d.dual || '\u2014') + '</span></td><td style="font-size:12px;color:var(--text-secondary);">' + d.duties + '</td></tr>';
+    });
+    h += '</tbody></table></div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>直属事业单位（6个）</h2></div><div class="card-body no-pad">';
+    h += '<table class="data-table"><thead><tr><th>单位名称</th><th>主要职责</th></tr></thead><tbody>';
+    DATA.subordinateUnits.forEach(u => {
+      let nameHtml = '<span style="font-weight:600;">' + u.name + '</span>';
+      if (u.name.indexOf('引沁入汾') > -1) nameHtml += ' <a href="yin-qin-ru-fen.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a>';
+      if (u.name.indexOf('水利发展中心') > -1) nameHtml += ' <a href="shuili-fazhan-zhongxin.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a>';
+      if (u.name.indexOf('水库移民管理') > -1) nameHtml += ' <a href="shuiku-yimin-zhongxin.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a>';
+      h += '<tr><td>' + nameHtml + '</td><td style="font-size:12px;color:var(--text-secondary);">' + u.duty + '</td></tr>';
+    });
+    h += '</tbody></table></div></div>';
+    return h;
+  },
+
+  projects: function() {
+    let h = '<div class="section-title">重大水利工程</div>';
+    DATA.keyProjects.forEach((p, i) => {
+      const badgeCls = p.statusType === 'green' ? 'badge-green' : p.statusType === 'amber' ? 'badge-amber' : 'badge-accent';
+      h += '<div class="card" style="margin-bottom:20px;">';
+      h += '<div class="card-header"><h2>' + p.name + '</h2><span class="badge ' + badgeCls + '">' + p.status + '</span></div>';
+      h += '<div class="card-body">';
+      h += '<div class="proj-meta"><span>\ud83d\udccd ' + p.location + '</span><span>\ud83d\udcc2 ' + p.category + '</span></div>';
+      h += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">' + p.description + '</p>';
+      if (p.name.indexOf('黄河古贤') === 0) h += '<a href="guxian.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('中部引黄') === 0) h += '<a href="zhongbu-yinhuang.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('汾西灌区') === 0) h += '<a href="fenxi-guanqu.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('中部引黄') === 0) h += '<a href="zhongbu-yinhuang.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      if (p.name.indexOf('汾西灌区') === 0) h += '<a href="fenxi-guanqu.html" style="display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:6px;font-weight:500;">查看详情 →</a>';
+      h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;"><div class="progress-bar" style="flex:1;height:8px;"><div class="progress-fill ' + (p.statusType === 'green' ? 'green' : 'amber') + '" style="width:' + p.progress + '%"></div></div><span style="font-size:12px;color:var(--text-secondary);font-weight:600;">' + p.progress + '%</span></div>';
+      h += '<div class="timeline">';
+      (p.milestones || []).forEach(m => {
+        const dotCls = m.type === 'green' ? 'green' : m.type === 'amber' ? 'amber' : '';
+        h += '<div class="timeline-item"><div class="timeline-dot ' + dotCls + '"></div><div class="timeline-date">' + m.date + '</div><div class="timeline-title">' + m.text + '</div></div>';
+      });
+      h += '</div>';
+      if (p.management) h += '<div style="margin-top:12px;font-size:12px;color:var(--text-secondary);"><strong>管理模式：</strong>' + p.management + '</div>';
+      if (p.org) h += '<div style="font-size:12px;color:var(--text-secondary);"><strong>相关单位：</strong>' + p.org.join('\u3001') + '</div>';
+      h += '</div></div>';
+    });
+    return h;
+  },
+
+  safety: function() {
+    let h = '<div class="section-title">防汛备汛与水利安全</div>';
+
+    h += '<div class="card" style="margin-bottom:20px;"><div class="card-header"><h2>安全形势</h2><a href="fangxun.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a></div><div class="card-body">';
+    h += '<p style="font-size:13px;color:var(--text-secondary);">' + DATA.safetyWork.context + '</p>';
+    h += '<div style="display:flex;gap:8px;margin-top:12px;">';
+    DATA.safetyWork.goals.forEach(g => {
+      h += '<div class="badge badge-green" style="font-size:13px;padding:6px 12px;">\ud83c\udfaf ' + g + '</div>';
+    });
+    h += '</div></div></div>';
+
+    h += '<div class="grid-2">';
+    h += '<div class="card"><div class="card-header"><h2>重点任务</h2></div><div class="card-body">';
+    DATA.safetyWork.tasks.forEach(t => {
+      h += '<div style="font-size:13px;margin-bottom:10px;padding-left:12px;border-left:2px solid var(--accent);"><strong>' + t.name + '</strong><br><span style="color:var(--text-secondary);">' + t.desc + '</span></div>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>督导检查记录</h2></div><div class="card-body"><div class="timeline">';
+    DATA.safetyWork.inspections.forEach(ins => {
+      h += '<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">' + ins.date + '</div><div class="timeline-title">' + ins.text + '</div></div>';
+    });
+    h += '</div></div></div></div>';
+
+    h += '<div class="grid-3" style="margin-top:20px;">';
+    h += '<div class="card"><div class="card-header"><h2>相关专题</h2></div><div class="card-body">';
+    h += '<a href="zhiben-gongjian.html" style="display:block;font-size:13px;color:var(--accent);text-decoration:none;padding:6px 0;font-weight:500;">水利安全生产治本攻坚三年行动 →</a>';
+    h += '<a href="anquan-fangkong.html" style="display:block;font-size:13px;color:var(--accent);text-decoration:none;padding:6px 0;font-weight:500;">安全防控六项机制 →</a>';
+    h += '<a href="xunqian-jiancha.html" style="display:block;font-size:13px;color:var(--accent);text-decoration:none;padding:6px 0;font-weight:500;">汛前安全大检查 →</a>';
+    h += '<a href="shuihan-fangyu.html" style="display:block;font-size:13px;color:var(--accent);text-decoration:none;padding:6px 0;font-weight:500;">水旱灾害防御职责分工 →</a>';
+    h += '</div></div></div>';
+
+    return h;
+  },
+
+  riverLake: function() {
+    let h = '<div class="section-title">河湖管理与河湖长制</div>';
+
+    h += '<div class="grid-2">';
+    h += '<div class="card"><div class="card-header"><h2>2026年五项重点任务</h2><a href="hehuzhang.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a></div><div class="card-body">';
+    DATA.riverLake.tasks2026.forEach((t, i) => {
+      h += '<div style="font-size:13px;margin-bottom:12px;padding-left:12px;border-left:2px solid var(--accent);"><strong>' + (i+1) + '. ' + t.name + '</strong><br><span style="color:var(--text-secondary);">' + t.desc + '</span></div>';
+    });
+    h += '</div></div>';
+
+    h += '<div><div class="card" style="margin-bottom:20px;"><div class="card-header"><h2>最近会议</h2></div><div class="card-body">';
+    h += '<div class="ann-item"><div class="ann-date">' + DATA.riverLake.meeting.date + '</div><div class="ann-title">' + DATA.riverLake.meeting.text + '</div></div>';
+    h += '</div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>技术手段</h2></div><div class="card-body">';
+    h += '<p style="font-size:13px;color:var(--text-secondary);">' + DATA.riverLake.technical + '</p>';
+    h += '</div></div></div></div>';
+
+    h += '<div class="card" style="margin-top:20px;"><div class="card-header"><h2>相关专题</h2></div><div class="card-body" style="display:flex;gap:24px;">';
+    h += '<a href="xingfu-hehu.html" style="font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;">幸福河湖建设 →</a>';
+    h += '<a href="aihong-zhengzhi.html" style="font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;">碍洪问题整治 →</a>';
+    h += '</div></div>';
+
+    return h;
+  },
+
+  waterResource: function() {
+    let h = '<div class="section-title">水资源管理</div>';
+
+    h += '<div class="card" style="margin-bottom:20px;"><div class="card-header"><h2>最严格水资源管理制度</h2><a href="shuiziyuan.html" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;">详情 →</a></div><div class="card-body">';
+    h += '<div style="display:flex;gap:8px;margin-bottom:16px;">';
+    DATA.waterResource.principles.forEach(p => {
+      h += '<span class="badge badge-green" style="font-size:13px;padding:6px 12px;">' + p + '</span>';
+    });
+    h += '</div>';
+    h += '<div style="font-size:13px;color:var(--text-secondary);"><strong>实施措施：</strong></div>';
+    DATA.waterResource.measures.forEach(m => {
+      h += '<div style="font-size:12.5px;color:var(--text-secondary);margin:4px 0 4px 16px;">\u00b7 ' + m + '</div>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="grid-3">';
+    DATA.waterResource.highlights.forEach(hl => {
+      h += '<div class="card"><div class="card-header"><h2>' + hl.name + '</h2></div><div class="card-body"><p style="font-size:13px;color:var(--text-secondary);">' + hl.desc + '</p></div></div>';
+    });
+    h += '<div class="card" style="margin-top:8px;"><div class="card-body" style="display:flex;gap:20px;padding:12px 20px;">';
+    h += '<a href="sishui-siding.html" style="font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;">四水四定 →</a>';
+    h += '<a href="jieshui-jiang.html" style="font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;">中国节水奖 →</a>';
+    h += '</div></div></div>';
+    return h;
+  },
+
+  ruralWater: function() {
+    let h = '<div class="section-title">农村水利水电</div>';
+    h += '<div class="grid-2">';
+    DATA.ruralWater.highlights.forEach(hl => {
+      h += '<div class="card" style="margin-bottom:20px;"><div class="card-header"><h2>' + hl.name + '</h2></div><div class="card-body"><p style="font-size:13px;color:var(--text-secondary);">' + hl.desc + '</p></div></div>';
+    });
+    h += '</div>';
+
+    h += '<div class="card" style="margin-top:0;"><div class="card-header"><h2>相关专题</h2></div><div class="card-body" style="display:flex;gap:24px;">';
+    h += '<a href="nongcun-gongshui.html" style="font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;">农村供水提档升级 →</a>';
+    h += '<a href="shuili-fupin.html" style="font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;">水利扶贫 →</a>';
+    h += '<a href="xiandai-shuiwang.html" style="font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;">现代水网工程 →</a>';
+    h += '</div></div>';
+
+    return h;
+  },
+
+  soilImmigration: function() {
+    let h = '<div class="section-title">水土保持与水库移民</div>';
+
+    h += '<div class="grid-2">';
+    h += '<div class="card"><div class="card-header"><h2>水土保持</h2></div><div class="card-body">';
+    DATA.soilImmigration.soil.forEach(s => {
+      h += '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;padding-left:12px;border-left:2px solid var(--green);">' + s + '</div>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>水库移民</h2></div><div class="card-body">';
+    DATA.soilImmigration.immigration.forEach(s => {
+      h += '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;padding-left:12px;border-left:2px solid var(--amber);">' + s + '</div>';
+    });
+    h += '</div></div></div>';
+
+    h += '<div class="card"><div class="card-header"><h2>古贤工程移民安置</h2></div><div class="card-body">';
+    h += '<p style="font-size:13px;color:var(--text-secondary);">' + DATA.soilImmigration.keyProject + '</p>';
+    h += '</div></div>';
+
+    h += '<div class="card" style="margin-top:20px;"><div class="card-body" style="display:flex;gap:24px;padding:12px 20px;">';
+    h += '<a href="shuiku-yimin-zhongxin.html" style="font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;">水库移民管理中心 →</a>';
+    h += '<a href="shuihan-fangyu.html" style="font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;">水旱灾害防御分工 →</a>';
+    h += '</div></div>';
+
+    return h;
+  }
+};
+
+const TABS = [
+  { id: "overview", label: "首页概览" },
+  { id: "organization", label: "机构设置" },
+  { id: "projects", label: "重大工程" },
+  { id: "safety", label: "防汛安全" },
+  { id: "riverLake", label: "河湖管理" },
+  { id: "waterResource", label: "水资源管理" },
+  { id: "ruralWater", label: "农村水利" },
+  { id: "soilImmigration", label: "水土保持与移民" }
+];
+
+let activeTab = "overview";
+
+function renderNav() {
+  const nav = document.getElementById("navTabs");
+  nav.innerHTML = TABS.map(function(t) {
+    return '<button class="nav-item' + (t.id === activeTab ? ' active' : '') + '" onclick="switchTab(\'' + t.id + '\')">' + t.label + '</button>';
+  }).join('');
+}
+
+function switchTab(id) {
+  activeTab = id;
+  renderNav();
+  document.getElementById("contentArea").innerHTML = TABLES[id]();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderNav();
+document.getElementById("contentArea").innerHTML = TABLES.overview();
+</script>
+
+</body>
+</html>
