@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>三个 AI Agent 网页制作测试</title>
+  <title>五个 AI Agent 网页制作测试</title>
   <style>
     :root {
       --ink: #172033;
@@ -123,7 +123,7 @@
     }
 
     .agent-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
     .agent-card {
@@ -212,6 +212,16 @@
       border-top: 5px solid var(--accent);
     }
 
+    .chatgpt-web {
+      --accent: #10a37f;
+      border-top: 5px solid var(--accent);
+    }
+
+    .gemini {
+      --accent: #7c3aed;
+      border-top: 5px solid var(--accent);
+    }
+
     footer {
       max-width: 1080px;
       margin: 0 auto;
@@ -254,8 +264,8 @@
 <body>
   <header>
     <p class="eyebrow">AI Agent Web Test</p>
-    <h1><span>三个 AI Agent 制作网页</span><span>的效果比较</span></h1>
-    <p class="lead">这是一场测试，用三个不同的 AI Agent 制作网页的比较。一共输入两个提示词，然后观察它们生成的不同网页效果。</p>
+    <h1><span>五个 AI Agent 制作网页</span><span>的效果比较</span></h1>
+    <p class="lead">这是一场测试，用五个不同的 AI Agent 制作网页的比较。一共输入两个提示词，然后观察它们生成的不同网页效果。</p>
   </header>
 
   <main>
@@ -275,15 +285,15 @@
     </section>
 
     <section class="section" aria-labelledby="result-title">
-      <h2 class="section-title" id="result-title">三个 AI 制作的不同效果</h2>
+      <h2 class="section-title" id="result-title">五个 AI 制作的不同效果</h2>
       <div class="agent-grid">
-        <a class="agent-card workbuddy" href="https://ooof.github.io/AI_HomePage/ai-3-html/WorkBuddy-3html/index.html" target="_blank" rel="noopener">
+        <a class="agent-card gemini" href="https://ooof.github.io/AI_HomePage/ai-3-html/gemini-3html/a.html" target="_blank" rel="noopener">
           <div class="agent-content">
-            <img class="agent-shot" src="assets/workbuddy.png" alt="WorkBuddy 制作网页过程截图">
+            <img class="agent-shot" src="assets/gemini.png" alt="Gemini 制作网页效果截图">
             <div class="agent-body">
               <div class="agent-mark" aria-hidden="true"></div>
-              <h3>WorkBuddy</h3>
-              <p>截图显示 WorkBuddy 任务界面与生成说明，适合放在 WorkBuddy 结果入口。</p>
+              <h3>Gemini</h3>
+              <p>截图展示 Gemini 生成的页面气质与视觉组织方式，便于和其他 Agent 结果对照。</p>
               <span class="agent-url">打开页面</span>
             </div>
           </div>
@@ -301,6 +311,18 @@
           </div>
         </a>
 
+        <a class="agent-card workbuddy" href="https://ooof.github.io/AI_HomePage/ai-3-html/WorkBuddy-3html/index.html" target="_blank" rel="noopener">
+          <div class="agent-content">
+            <img class="agent-shot" src="assets/workbuddy.png" alt="WorkBuddy 制作网页过程截图">
+            <div class="agent-body">
+              <div class="agent-mark" aria-hidden="true"></div>
+              <h3>WorkBuddy</h3>
+              <p>截图显示 WorkBuddy 任务界面与生成说明，适合放在 WorkBuddy 结果入口。</p>
+              <span class="agent-url">打开页面</span>
+            </div>
+          </div>
+        </a>
+
         <a class="agent-card chatgpt" href="https://ooof.github.io/AI_HomePage/ai-3-html/ChatGPT-3html/a.html" target="_blank" rel="noopener">
           <div class="agent-content">
             <img class="agent-shot" src="assets/chatgpt.png" alt="ChatGPT 制作三个 HTML 页面过程截图">
@@ -308,6 +330,18 @@
               <div class="agent-mark" aria-hidden="true"></div>
               <h3>ChatGPT</h3>
               <p>截图显示 ChatGPT/Codex 创建并编辑三个 HTML 文件的过程。</p>
+              <span class="agent-url">打开页面</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="agent-card chatgpt-web" href="https://ooof.github.io/AI_HomePage/ai-3-html/chatgpt-web-3html/index.html" target="_blank" rel="noopener">
+          <div class="agent-content">
+            <img class="agent-shot" src="assets/chatgpt-web.png" alt="ChatGPT Web 制作网页效果截图">
+            <div class="agent-body">
+              <div class="agent-mark" aria-hidden="true"></div>
+              <h3>ChatGPT Web</h3>
+              <p>截图呈现 ChatGPT Web 生成页面的整体效果，延续三页互链与环形标记的测试主题。</p>
               <span class="agent-url">打开页面</span>
             </div>
           </div>
