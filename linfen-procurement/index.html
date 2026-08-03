@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>临汾市政府采购专题站 · 总览</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="lf-nav" data-lf-nav></header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>临汾市政府采购全景专题</h1>
+    <p>基于中国政府采购网·山西分网公开数据的临汾市全域采购画像：覆盖 17 个区县、2012–2026 全量公告与 2023 年起明细库，按项目级去重聚合，揭示预算、合同、节支与各方参与格局。</p>
+    <span class="tag" id="hero-tag">数据加载中…</span>
+  </div>
+
+  <div id="kpis" class="kpis"></div>
+
+  <div class="section-title">分布与趋势 <small>采购规模、方式与品目结构</small></div>
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="card">
+      <h3><span class="bar"></span>年度采购规模 <span class="sub">预算 vs 合同（亿元）</span></h3>
+      <div id="ch-year"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>月度公告量 <span class="sub">2023-01 起明细</span></h3>
+      <div id="ch-month"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>采购方式构成 <span class="sub">按公告数</span></h3>
+      <div id="ch-method"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>货物 / 服务 / 工程 <span class="sub">按公告数</span></h3>
+      <div id="ch-cat"></div>
+    </div>
+  </div>
+
+  <div class="section-title">区域格局 <small>17 个区县的采购密度</small></div>
+  <div class="grid" style="grid-template-columns: 1.4fr 1fr;">
+    <div class="card">
+      <h3><span class="bar"></span>各区县合同金额 <span class="sub">Top 15（亿元）</span></h3>
+      <div id="ch-dist"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>项目金额分档 <span class="sub">按公告数</span></h3>
+      <div id="ch-bucket"></div>
+    </div>
+  </div>
+
+  <div class="section-title">最新公告 <small>按发布时间倒序</small></div>
+  <div class="card">
+    <div id="latest" class="list"></div>
+    <div style="margin-top:12px;"><a class="btn ghost" href="search.html">查看全部并筛选 →</a></div>
+  </div>
+
+  <div class="section-title">大额项目 <small>预算与合同 Top 项目</small></div>
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="card">
+      <h3><span class="bar"></span>预算最高项目 Top 12</h3>
+      <div id="top-budget"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>合同金额最高项目 Top 12</h3>
+      <div id="top-contract"></div>
+    </div>
+  </div>
+
+  <div class="section-title">参与方排行 <small>采购单位 · 代理机构 · 中标供应商</small></div>
+  <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+    <div class="card">
+      <h3><span class="bar"></span>采购单位（按预算）</h3>
+      <table class="lf"><tbody id="rank-buyer"></tbody></table>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>代理机构（按项目数）</h3>
+      <table class="lf"><tbody id="rank-agent"></tbody></table>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>中标供应商（按合同额）</h3>
+      <table class="lf"><tbody id="rank-sup"></tbody></table>
+    </div>
+  </div>
+
+  <div class="section-title">采购意向公开 <small>提前披露的采购计划</small></div>
+  <div class="grid" style="grid-template-columns: 1.4fr 1fr;">
+    <div class="card">
+      <h3><span class="bar"></span>意向预算·区县分布 <span class="sub">亿元</span></h3>
+      <div id="ch-intent-dist"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>意向预算·月度分布 <span class="sub">按披露项数</span></h3>
+      <div id="ch-intent-month"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;">
+    <h3><span class="bar"></span>预算最高的采购意向 Top 12</h3>
+    <div id="top-intent"></div>
+  </div>
+
+  <div class="section-title">合同公示 <small>已公示的政府采购合同</small></div>
+  <div class="grid" style="grid-template-columns: 1.4fr 1fr;">
+    <div class="card">
+      <h3><span class="bar"></span>合同金额·年度分布 <span class="sub">亿元</span></h3>
+      <div id="ch-contract-year"></div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>合同金额最高供应商 Top 12</h3>
+      <table class="lf"><tbody id="rank-contract-sup"></tbody></table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;">
+    <h3><span class="bar"></span>合同金额最高公示 Top 12</h3>
+    <div id="top-contract-pub"></div>
+  </div>
+
+  <div class="section-title">详情缓存覆盖率 <small>各公告类型的结构化详情命中率</small></div>
+  <div class="card">
+    <table class="lf"><thead><tr><th>公告类型</th><th class="num">公告总量</th><th class="num">已缓存</th><th class="num">覆盖率</th></tr></thead><tbody id="cov-tbody"></tbody></table>
+  </div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<!-- 数据：总览 + 各年记录分片 -->
+<script src="data/overview.js"></script>
+<script src="data/rec-2023.js"></script>
+<script src="data/rec-2024.js"></script>
+<script src="data/rec-2025.js"></script>
+<script src="data/rec-2026.js"></script>
+<script src="assets/common.js"></script>
+<script src="assets/index.js"></script>
+</body>
+</html>

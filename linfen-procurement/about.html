@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>临汾市政府采购专题站 · 数据说明</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="lf-nav" data-lf-nav></header>
+
+<div class="wrap">
+  <div class="section-title" style="margin-top:8px;">数据说明与方法口径</div>
+
+  <div class="card">
+    <h3><span class="bar"></span>数据来源</h3>
+    <ul style="margin:0;padding-left:20px;line-height:1.9;">
+      <li><b>主源</b>：中国政府采购网 · 山西分网（ccgp-shanxi.gov.cn）公开公告接口，覆盖临汾市全域 17 个区县（行政区划前缀 <code>1410*</code>）。</li>
+      <li><b>范围</b>：明细库为 2023-01 起逐月采集的全量公告（含招标、磋商、谈判、询价、单一来源、中标/成交、合同、更正、废标、采购意向、需求公示等全生命周期）；历史聚合追溯至 2012 年用于总量对照。</li>
+      <li><b>字段</b>：预算金额、合同金额、采购人、代理机构、中标供应商、评审专家、代理服务费、主要标的、<b>采购意向明细、合同公示条款、更正前后对照</b>等，均从公告正文中结构化抽取。结构化详情已覆盖约 <b>68%</b> 的明细公告（采购意向 / 合同公示 / 更正等类型接近全覆盖）。</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h3><span class="bar"></span>为什么不从 ccgp.gov.cn 的「下一页」采集</h3>
+    <p style="margin:0 0 8px;">用户最初要求沿中国政府采购网地方公告页的「下一页」链接采集。实测该静态分页接口有硬上限（约 25 页、每页约 20 条），且地域字段仅精确到省级，无法定位到「临汾」。以此路径采集，临汾相关结果仅 1 条，远不足以支撑专题站。</p>
+    <p style="margin:0;">因此改用山西分网 JSON 接口（<code>districtCode=141000</code>）做行政区级精确过滤，既突破分页上限，又保证临汾全域覆盖——这才是本专题站的数据底座。</p>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h3><span class="bar"></span>去重与统计口径</h3>
+    <ul style="margin:0;padding-left:20px;line-height:1.9;">
+      <li><b>项目级去重</b>：同一项目会在「招标 / 更正 / 废标 / 中标 / 合同」多次出现。按项目名归一化（去除「采购/更正/废标…公告」后缀与括号备注）后合并为单一项目，金额取各阶段<b>最大值</b>，避免重复计入导致注水。</li>
+      <li><b>金额口径</b>：「预算合计 / 合同合计」为去重后项目的预算/合同之和；「节支率」仅对同时具备预算与合同、且合同≤预算 1.5 倍的可比对样本计算。</li>
+      <li><b>明细 vs 历史</b>：明细库（2023 起）用于榜单、筛选与详情；历史聚合（2012 起）仅用于总量与时间跨度对照，不进入项目级统计。</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h3><span class="bar"></span>关键数字</h3>
+    <div id="about-stats" class="meta-grid"></div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h3><span class="bar"></span>使用须知</h3>
+    <p style="margin:0;color:var(--mute);line-height:1.8;">
+      本专题站为公开政府采购数据的聚合与可视化分析，所有数据来自政府公开渠道，未作任何篡改。金额、供应商、专家等信息以原发公告为准；个别字段因公告格式差异可能存在抽取偏差。本页仅供研究、检索与宏观观察参考，<b>不构成任何采购、投标或决策依据</b>。如需权威信息，请以中国政府采购网官方发布为准。
+    </p>
+  </div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script src="data/overview.js"></script>
+<script src="assets/common.js"></script>
+<script>
+  (function () {
+    var O = window.LF_OVERVIEW;
+    LF.renderNav("about");
+    if (!O) { document.getElementById("about-stats").innerHTML = '<div class="notice">数据未载入。</div>'; return; }
+    var stats = [
+      ["去重项目数", LF.fmtInt(O.proj_total)],
+      ["明细公告", LF.fmtInt(O.detail_total) + " 条"],
+      ["详情覆盖率", LF.fmtPct(O.detail_rate)],
+      ["采购意向（去重）", LF.fmtMoney((O.intent || {}).uniq_amount) + " · " + LF.fmtInt((O.intent || {}).uniq_items) + " 项"],
+      ["合同公示（去重）", LF.fmtMoney((O.contract_pub || {}).uniq_amount) + " · " + LF.fmtInt((O.contract_pub || {}).uniq_docs) + " 份"],
+      ["历史聚合（2012起）", LF.fmtInt(O.hist_total) + " 条"],
+      ["采购单位", LF.fmtInt(O.n_buyers) + " 家"],
+      ["代理机构", LF.fmtInt(O.n_agents) + " 家"],
+      ["中标供应商", LF.fmtInt(O.n_sups) + " 家"],
+      ["详情缓存", LF.fmtInt(O.detail_count) + " 条"],
+      ["数据生成时间", O.generated]
+    ];
+    document.getElementById("about-stats").innerHTML = stats.map(function (s) {
+      return '<div><div class="k">' + s[0] + '</div><div class="v">' + s[1] + '</div></div>';
+    }).join("");
+    document.getElementById("foot").innerHTML =
+      "临汾市政府采购专题站 · 数据采集自中国政府采购网山西分网公开接口 · 生成于 " + O.generated + "。";
+  })();
+</script>
+</body>
+</html>

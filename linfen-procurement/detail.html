@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>临汾市政府采购专题站 · 项目详情</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="lf-nav" data-lf-nav></header>
+
+<div class="wrap" id="detail-root">
+  <div class="loading">正在加载项目详情…</div>
+</div>
+
+<!-- 右侧对照面板：三个来源（政府网站原文 / 信息来源原文 / 政府原始数据）均在此并排核验 -->
+<aside id="gov-panel" aria-hidden="true">
+  <div class="gp-resize" id="gp-resize" title="拖动调节面板宽度"></div>
+  <div class="gp-bar">
+    <span class="gp-dot"></span>
+    <div class="gp-tabs">
+      <button class="gp-tab active" data-src="gov" type="button">政府网站原文</button>
+      <button class="gp-tab" data-src="source" type="button">信息来源原文</button>
+      <button class="gp-tab" data-src="raw" type="button">政府原始数据</button>
+    </div>
+    <a class="gp-new" id="gp-open-new" href="#" target="_blank" rel="noopener">新标签打开 ↗</a>
+    <button class="gp-close" id="gp-close" type="button" title="关闭对照">✕</button>
+  </div>
+  <iframe id="gp-frame" title="对照原文" referrerpolicy="no-referrer"></iframe>
+</aside>
+
+<script src="data/overview.js"></script>
+<script src="assets/common.js"></script>
+<script src="assets/detail.js"></script>
+</body>
+</html>

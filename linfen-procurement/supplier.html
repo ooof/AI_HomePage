@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>临汾市政府采购专题站 · 乙方透视</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="lf-nav" data-lf-nav></header>
+
+<div class="wrap">
+  <div class="section-title" style="margin-top:8px;">乙方（供应方）透视 <small>点击供应商查看其执行项目的全过程</small></div>
+  <a class="entry-btn" href="supplier_viz.html">📊 数据透视（KPI 与图表） →</a>
+
+  <div class="section-title" style="margin-top:24px;">全部乙方（供应商） <small>点击任一供应商，查看其全部执行项目及过程链</small></div>
+  <div id="sup-all-view">
+    <div class="ent-bar">
+      <input id="sup-filter" class="ent-filter" type="search" placeholder="输入供应商名称筛选…" autocomplete="off">
+      <span id="sup-count" class="ent-count"></span>
+    </div>
+    <div id="sup-list" class="ent-list"></div>
+  </div>
+  <div id="sup-detail" class="ent-detail" style="display:none;"></div>
+
+  <div class="foot">数据来源：中国政府采购网·山西分网公开公告。本页聚合自含供应商与合同金额的合同类公告，按供应商名称归并，仅供参考。</div>
+</div>
+
+<script src="data/overview.js"></script>
+<script src="data/supplier_stats.js"></script>
+<script src="data/sup_index.js"></script>
+<script src="assets/common.js"></script>
+<script src="assets/entity.js"></script>
+<script src="assets/supplier.js"></script>
+</body>
+</html>
