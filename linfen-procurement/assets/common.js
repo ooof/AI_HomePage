@@ -8,6 +8,12 @@
 
   const LF = global.LF = {};
 
+  // 详情分片（det-*.js）由 build_data.py 单独生成并异步加载。
+  // 若某分片头部漏写 window.LF_DET=window.LF_DET||{}; 初始化，
+  // Object.assign(window.LF_DET, …) 会对 undefined 抛错、导致该分片整片为空、
+  // 所有走该分片的详情页误报“暂无结构化详情缓存”。这里提前兜底初始化。
+  global.LF_DET = global.LF_DET || {};
+
   /* ---------- 颜色（政务公开风：靛蓝 + 中国红 + 中性灰） ---------- */
   LF.PALETTE = [
     "#1f5fa8", "#c0392b", "#2e8b8b", "#e0883b", "#5b6abf",
